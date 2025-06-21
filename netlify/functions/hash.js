@@ -1,11 +1,12 @@
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 exports.handler = async (event) => {
-  const { input } = JSON.parse(event.body || '{}');
-  const hash = crypto.createHash('sha256').update(input).digest('hex');
+  const body = JSON.parse(event.body);
+  const input = body.input;
+  const hash = crypto.createHash("sha256").update(input).digest("hex");
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ token: hash }),
+    body: JSON.stringify({ hash }),
   };
 };
